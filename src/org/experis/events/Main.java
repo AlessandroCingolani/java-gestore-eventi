@@ -38,7 +38,7 @@ public class Main {
                     System.out.print("Data con yyyy-mm-gg:");
                     data = LocalDate.parse(scan.nextLine());
                 } catch (Exception e) {
-                    System.out.println("Errore inserisci il formato giusto");
+                    System.out.println("Errore inserisci il data giusto");
                 }
 
             }while(data == null);
@@ -64,6 +64,9 @@ public class Main {
         // disdette
         disdette(evento, scan, flagDisdette);
 
+        System.out.println("===================================================");
+        System.out.println(seatPrint(evento.getNumeroPostiPrenotati(), evento.postiDisponibili()));
+        System.out.println("===================================================");
 
         scan.close();
 

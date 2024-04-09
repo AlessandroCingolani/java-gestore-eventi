@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProgrammaEventi {
+public class ProgrammaEventi{
     //attributi
     private String titolo;
     private List<Evento> eventi;
@@ -52,10 +52,14 @@ public class ProgrammaEventi {
                 '}';
     }
 
-    public List<Evento> ordinaPerData() {
+
+
+    // con lambda
+    public String ordinaPerData() {
         return this.eventi.stream()
-                .sorted(Comparator.comparing(Evento::getData))
-                .collect(Collectors.toList());
+                 .sorted(Comparator.comparing(Evento::getData))
+                  .map(eventi1 -> eventi1.getData() + " - " + eventi1.getTitolo())
+                 .collect(Collectors.joining("\n"));
     }
 
 }

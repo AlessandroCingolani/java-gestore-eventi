@@ -89,7 +89,7 @@ public  class Evento {
         return getNumeroPostiTotali() - getNumeroPostiPrenotati();
     }
 
-    private String formattaData(LocalDate data){
+    public String formattaData(LocalDate data){
         DateTimeFormatter formatoItaliano = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ITALIAN);
         return data.format(formatoItaliano);
     }

@@ -15,7 +15,8 @@ public class Main {
         System.out.println(evento.getNumeroPostiTotali());
 
         try {
-            evento.prenota(1001);
+            evento.prenota(500);
+            evento.disdici(501);
         } catch (EventoException e) {
             System.out.println(e);
         }

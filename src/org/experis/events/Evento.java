@@ -77,8 +77,11 @@ public  class Evento {
         this.numeroPostiPrenotati += prenota;
     }
 
-    public void  disdici(){
-
+    public void  disdici(int disdici) throws EventoException {
+        if(disdici > getNumeroPostiPrenotati()){
+            throw new EventoException("Non puoi disdire controlla quanti posti sono stati prenotati!");
+        }
+        this.numeroPostiPrenotati -= disdici;
     }
 
     private int postiDisponibili(){

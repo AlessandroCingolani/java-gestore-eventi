@@ -36,9 +36,20 @@ public class Main {
         }while(evento == null);
 
         // prenotazioni
+        prenotazioni(evento, scan, flagPrenotazioni);
+
+        // disdette
+        disdette(evento, scan, flagDisdette);
+
+
+        scan.close();
+
+    }
+
+    private static void prenotazioni(Evento evento, Scanner scan, boolean flagPrenotazioni) {
         do {
             System.out.println("===================================================");
-            System.out.println(seatPrint(evento.getNumeroPostiPrenotati(),evento.postiDisponibili()));
+            System.out.println(seatPrint(evento.getNumeroPostiPrenotati(), evento.postiDisponibili()));
             System.out.println("===================================================");
             System.out.print("Vuoi effettuare delle prenotazioni? y/n: ");
 
@@ -62,11 +73,12 @@ public class Main {
                     break;
             }
         }while(!flagPrenotazioni);
+    }
 
-        // disdette
+    private static void disdette(Evento evento, Scanner scan, boolean flagDisdette) {
         do {
             System.out.println("===================================================");
-            System.out.println(seatPrint(evento.getNumeroPostiPrenotati(),evento.postiDisponibili()));
+            System.out.println(seatPrint(evento.getNumeroPostiPrenotati(), evento.postiDisponibili()));
             System.out.println("===================================================");
             System.out.print("Vuoi disdire delle prenotazioni? y/n: ");
 
@@ -90,10 +102,6 @@ public class Main {
                     break;
             }
         }while(!flagDisdette);
-
-
-        scan.close();
-
     }
 
     private static String seatPrint(int prenotati ,int disponibili){

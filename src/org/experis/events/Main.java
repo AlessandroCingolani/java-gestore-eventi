@@ -18,6 +18,7 @@ public class Main {
         boolean flagPrenotazioni = false;
         boolean flagDisdette = false;
 
+
         // tested concerto
 //        Concerto concerto = null;
 //        try {
@@ -64,6 +65,7 @@ public class Main {
         // disdette
         disdette(evento, scan, flagDisdette);
 
+
         System.out.println("===================================================");
         System.out.println(seatPrint(evento.getNumeroPostiPrenotati(), evento.postiDisponibili()));
         System.out.println("===================================================");
@@ -100,11 +102,11 @@ public class Main {
                     System.out.println("Inserisci opzione valida!");
                     break;
             }
-        }while(!flagPrenotazioni);
+        }while(!flagPrenotazioni && evento.postiDisponibili() > 0);
     }
 
     private static void disdette(Evento evento, Scanner scan, boolean flagDisdette) {
-        do {
+        while(!flagDisdette && evento.getNumeroPostiPrenotati() > 0){
             System.out.println("===================================================");
             System.out.println(seatPrint(evento.getNumeroPostiPrenotati(), evento.postiDisponibili()));
             System.out.println("===================================================");
@@ -129,8 +131,10 @@ public class Main {
                     System.out.println("Inserisci opzione valida!");
                     break;
             }
-        }while(!flagDisdette);
-    }
+        }
+
+    };
+
 
     private static String seatPrint(int prenotati ,int disponibili){
         return "Posti prenotati: "+ prenotati + "\t" + "Posti disponibili:" + disponibili;

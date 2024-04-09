@@ -2,6 +2,7 @@ package org.experis.events;
 
 import exceptions.EventoException;
 
+import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -10,6 +11,7 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
         Evento evento = null;
+        LocalDate data = null;
         // flag choice  prenotazioni
         boolean flagPrenotazioni = false;
         boolean flagDisdette = false;
@@ -18,8 +20,16 @@ public class Main {
             System.out.println("Inserisci i seguenti dati per aggiungere un nuovo evento");
             System.out.print("Titolo:");
             String title = scan.nextLine();
-            System.out.print("Data con yyyy-mm-gg:");
-            String date = scan.nextLine();
+            do {
+                try {
+                    System.out.print("Data con yyyy-mm-gg:");
+                    data = LocalDate.parse(scan.nextLine());
+                } catch (Exception e) {
+                    System.out.println("Errore inserisci il formato giusto");
+                }
+
+            }while(data == null);
+
             int totalSeat = 0;
             try {
                 System.out.print("Numero di posti che può ospitare l'evento:");
@@ -28,7 +38,7 @@ public class Main {
                 System.out.println("Inserisci un numero maggiore di 0");
             }
             try {
-                evento = new Evento(title,date,totalSeat);
+                evento = new Evento(title,data,totalSeat);
                 System.out.println(evento);
             } catch (EventoException e) {
                 System.out.println(e);
@@ -107,5 +117,7 @@ public class Main {
     private static String seatPrint(int prenotati ,int disponibili){
         return "Posti prenotati: "+ prenotati + "\t" + "Posti disponibili:" + disponibili;
     }
+
+
 
 }

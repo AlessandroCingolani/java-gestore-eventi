@@ -15,26 +15,20 @@ public  class Evento {
 
 
     // Costruttori
-    //TODO: gestire parse data in modo corretto
-    public Evento(String titolo, String data, int numeroPostiTotali) throws EventoException {
+    public Evento(String titolo, LocalDate data, int numeroPostiTotali) throws EventoException {
         if(titolo == null || titolo.isEmpty()) {
             throw new EventoException("Il titolo non può essere nullo o vuoto!");
         }
-        if (data.isEmpty()){
-            throw new EventoException("La data non può essere un campo vuoto");
-        }
-        // Formattazione della data da stringa a LocalDate
-        LocalDate checkedData = LocalDate.parse(data);
 
-        if (checkedData.isBefore(LocalDate.now())){
-            throw new EventoException("La data non può essere di un formato diverso o minore della data attuale!");
+        if (data.isBefore(LocalDate.now())){
+            throw new EventoException("La data non può essere minore della data attuale!");
         }
         if(numeroPostiTotali <= 0){
             throw new EventoException("Il numero dei posti totali deve essere maggiore di 0!");
         }
 
         this.titolo = titolo;
-        this.data = checkedData;
+        this.data = data;
         this.numeroPostiTotali = numeroPostiTotali;
         numeroPostiPrenotati = 0;
     }
@@ -58,12 +52,11 @@ public  class Evento {
         return data;
     }
 
-    public void setData(String data) throws EventoException {
-        LocalDate checkedData = LocalDate.parse(data);
-        if (checkedData.isBefore(LocalDate.now())){
+    public void setData(LocalDate data) throws EventoException {
+        if (data.isBefore(LocalDate.now())){
             throw new EventoException("La data non può essere nulla o minore della data attuale!");
         }
-        this.data = checkedData;
+        this.data = data;
 
     }
 

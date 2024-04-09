@@ -15,13 +15,14 @@ public  class Evento {
 
 
     // Costruttori
+    //TODO: gestire parse data in modo corretto
     public Evento(String titolo, String data, int numeroPostiTotali) throws EventoException {
         if(titolo == null || titolo.isEmpty()) {
             throw new EventoException("Il titolo non può essere nullo o vuoto!");
         }
         // Formattazione della data da stringa a LocalDate
-        this.data = LocalDate.parse(data);
-        if (this.data.isBefore(LocalDate.now())){
+        LocalDate checkedData = LocalDate.parse(data);
+        if (checkedData.isBefore(LocalDate.now())){
             throw new EventoException("La data non può essere di un formato diverso o minore della data attuale!");
         }
         if(numeroPostiTotali <= 0){
@@ -29,6 +30,7 @@ public  class Evento {
         }
 
         this.titolo = titolo;
+        this.data = checkedData;
         this.numeroPostiTotali = numeroPostiTotali;
         numeroPostiPrenotati = 0;
     }
@@ -52,11 +54,13 @@ public  class Evento {
         return data;
     }
 
-    public void setData(LocalDate data) throws EventoException {
-        if (data == null || data.isBefore(LocalDate.now())){
+    public void setData(String data) throws EventoException {
+        LocalDate checkedData = LocalDate.parse(data);
+        if (checkedData.isBefore(LocalDate.now())){
             throw new EventoException("La data non può essere nulla o minore della data attuale!");
         }
-        this.data = data;
+        this.data = checkedData;
+
     }
 
     public int getNumeroPostiTotali() {
@@ -71,20 +75,20 @@ public  class Evento {
 
     // Metodi
     public void prenota(int prenota) throws EventoException{
-        if(prenota > postiDisponibili()){
-            throw new EventoException("Non ci sono posti disponibili!");
+        if(prenota > postiDisponibili() || this.data.isBefore(LocalDate.now())){
+            throw new EventoException("Non puoi prenotare controlla data evento e posti disponibili!");
         }
         this.numeroPostiPrenotati += prenota;
     }
 
     public void  disdici(int disdici) throws EventoException {
-        if(disdici > getNumeroPostiPrenotati()){
-            throw new EventoException("Non puoi disdire controlla quanti posti sono stati prenotati!");
+        if(disdici > getNumeroPostiPrenotati() || this.data.isBefore(LocalDate.now())){
+            throw new EventoException("Non puoi disdire controlla data evento e posti prenotati!");
         }
         this.numeroPostiPrenotati -= disdici;
     }
 
-    private int postiDisponibili(){
+    public int postiDisponibili(){
         return getNumeroPostiTotali() - getNumeroPostiPrenotati();
     }
 

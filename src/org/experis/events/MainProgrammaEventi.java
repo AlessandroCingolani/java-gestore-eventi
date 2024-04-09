@@ -24,6 +24,8 @@ public class MainProgrammaEventi {
         System.out.println(list.arraySize());
 
         // svuoto array eventi
+        list.clearArray();
+        System.out.println(list);
 
     }
 }

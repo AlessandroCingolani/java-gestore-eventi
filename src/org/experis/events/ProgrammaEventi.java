@@ -39,6 +39,10 @@ public class ProgrammaEventi {
        return this.eventi.size();
     }
 
+    public void clearArray(){
+        this.eventi.clear();
+    }
+
     @Override
     public String toString() {
         return "ProgrammaEventi{" +

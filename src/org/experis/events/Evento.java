@@ -20,8 +20,12 @@ public  class Evento {
         if(titolo == null || titolo.isEmpty()) {
             throw new EventoException("Il titolo non può essere nullo o vuoto!");
         }
+        if (data.isEmpty()){
+            throw new EventoException("La data non può essere un campo vuoto");
+        }
         // Formattazione della data da stringa a LocalDate
         LocalDate checkedData = LocalDate.parse(data);
+
         if (checkedData.isBefore(LocalDate.now())){
             throw new EventoException("La data non può essere di un formato diverso o minore della data attuale!");
         }
@@ -75,14 +79,14 @@ public  class Evento {
 
     // Metodi
     public void prenota(int prenota) throws EventoException{
-        if(prenota > postiDisponibili() || this.data.isBefore(LocalDate.now())){
+        if(prenota > postiDisponibili() || this.data.isBefore(LocalDate.now()) || prenota < 0){
             throw new EventoException("Non puoi prenotare controlla data evento e posti disponibili!");
         }
         this.numeroPostiPrenotati += prenota;
     }
 
     public void  disdici(int disdici) throws EventoException {
-        if(disdici > getNumeroPostiPrenotati() || this.data.isBefore(LocalDate.now())){
+        if(disdici > getNumeroPostiPrenotati() || this.data.isBefore(LocalDate.now()) || disdici < 0){
             throw new EventoException("Non puoi disdire controlla data evento e posti prenotati!");
         }
         this.numeroPostiPrenotati -= disdici;

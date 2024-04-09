@@ -38,13 +38,14 @@ public class Main {
         // prenotazioni
         do {
             System.out.println("===================================================");
+            System.out.println(seatPrint(evento.getNumeroPostiPrenotati(),evento.postiDisponibili()));
+            System.out.println("===================================================");
             System.out.print("Vuoi effettuare delle prenotazioni? y/n: ");
 
             String choice = scan.nextLine().toLowerCase();
             switch (choice){
                 case "y":
                     // aggiungi
-                    System.out.println(seatPrint(evento.getNumeroPostiPrenotati(),evento.postiDisponibili()));
                     System.out.print("Quante posti da prenotare:");
                     int prenotazioni = Integer.parseInt(scan.nextLine());
                     try {
@@ -65,13 +66,14 @@ public class Main {
         // disdette
         do {
             System.out.println("===================================================");
+            System.out.println(seatPrint(evento.getNumeroPostiPrenotati(),evento.postiDisponibili()));
+            System.out.println("===================================================");
             System.out.print("Vuoi disdire delle prenotazioni? y/n: ");
 
             String choice = scan.nextLine().toLowerCase();
             switch (choice){
                 case "y":
                     // disdici
-                    System.out.println(seatPrint(evento.getNumeroPostiPrenotati(),evento.postiDisponibili()));
                     System.out.print("Quante posti da disdire:");
                     int disdette = Integer.parseInt(scan.nextLine());
                     try {

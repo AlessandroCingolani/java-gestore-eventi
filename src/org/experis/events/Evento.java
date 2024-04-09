@@ -15,19 +15,20 @@ public  class Evento {
 
 
     // Costruttori
-    public Evento(String titolo, LocalDate data, int numeroPostiTotali) throws EventoException {
+    public Evento(String titolo, String data, int numeroPostiTotali) throws EventoException {
         if(titolo == null || titolo.isEmpty()) {
             throw new EventoException("Il titolo non può essere nullo o vuoto!");
         }
-        if (data == null || data.isBefore(LocalDate.now())){
-            throw new EventoException("La data non può essere nulla o minore della data attuale!");
+        // Formattazione della data da stringa a LocalDate
+        this.data = LocalDate.parse(data);
+        if (this.data.isBefore(LocalDate.now())){
+            throw new EventoException("La data non può essere di un formato diverso o minore della data attuale!");
         }
         if(numeroPostiTotali <= 0){
             throw new EventoException("Il numero dei posti totali deve essere maggiore di 0!");
         }
 
         this.titolo = titolo;
-        this.data = data;
         this.numeroPostiTotali = numeroPostiTotali;
         numeroPostiPrenotati = 0;
     }
@@ -69,14 +70,20 @@ public  class Evento {
 
 
     // Metodi
-//    public void prenota(int numeroPostiPrenotati){
-//        if()
-//
-//    }
-//
-//    public void  disdici(){
-//
-//    }
+    public void prenota(int prenota) throws EventoException{
+        if(prenota > postiDisponibili()){
+            throw new EventoException("Non ci sono posti disponibili!");
+        }
+        this.numeroPostiPrenotati += prenota;
+    }
+
+    public void  disdici(){
+
+    }
+
+    private int postiDisponibili(){
+        return getNumeroPostiTotali() - getNumeroPostiPrenotati();
+    }
 
     private String formattaData(LocalDate data){
         DateTimeFormatter formatoItaliano = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ITALIAN);
@@ -85,6 +92,6 @@ public  class Evento {
 
     @Override
     public String toString() {
-        return formattaData(getData());
+        return formattaData(getData()) + " - " + getTitolo();
     }
 }

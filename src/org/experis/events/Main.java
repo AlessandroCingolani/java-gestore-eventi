@@ -2,7 +2,9 @@ package org.experis.events;
 
 import exceptions.EventoException;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -15,6 +17,17 @@ public class Main {
         // flag choice  prenotazioni
         boolean flagPrenotazioni = false;
         boolean flagDisdette = false;
+
+        // tested concerto
+//        Concerto concerto = null;
+//        try {
+//             concerto = new Concerto("ciao",LocalDate.parse("2024-11-12"),1000, LocalTime.parse("10:50"),new BigDecimal("12"));
+//        } catch (EventoException e) {
+//            System.out.println(e);
+//        }
+//
+//        System.out.println(concerto);
+
         do {
             System.out.println("========================================================");
             System.out.println("Inserisci i seguenti dati per aggiungere un nuovo evento");
@@ -56,6 +69,8 @@ public class Main {
 
     }
 
+
+    // metodi static
     private static void prenotazioni(Evento evento, Scanner scan, boolean flagPrenotazioni) {
         do {
             System.out.println("===================================================");

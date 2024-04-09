@@ -53,12 +53,11 @@ public class ProgrammaEventi{
     }
 
 
-
     // con lambda
     public String ordinaPerData() {
         return this.eventi.stream()
                  .sorted(Comparator.comparing(Evento::getData))
-                  .map(eventi1 -> eventi1.getData() + " - " + eventi1.getTitolo())
+                  .map(e -> e.getData() + " - " + e.getTitolo())
                  .collect(Collectors.joining("\n"));
     }
 

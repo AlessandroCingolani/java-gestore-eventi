@@ -2,6 +2,7 @@ package org.experis.events;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +50,12 @@ public class ProgrammaEventi {
                 "titolo='" + titolo + '\'' +
                 ", eventi=" + eventi +
                 '}';
+    }
+
+    public List<Evento> ordinaPerData() {
+        return this.eventi.stream()
+                .sorted(Comparator.comparing(Evento::getData))
+                .collect(Collectors.toList());
     }
 
 }

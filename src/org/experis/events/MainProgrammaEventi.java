@@ -18,14 +18,19 @@ public class MainProgrammaEventi {
             System.out.println(e);
         }
         // filtraggio per data
+        System.out.println("=====================================");
         System.out.println(list.filterData( LocalDate.parse("2024-11-12")));
 
         // size array eventi
+        System.out.println("=====================================");
         System.out.println(list.arraySize());
 
         // svuoto array eventi
-        list.clearArray();
-        System.out.println(list);
+//        System.out.println("=====================================");
+//        list.clearArray();
+//        System.out.println(list);
 
+        // ordino per data
+        System.out.println(list.ordinaPerData());
     }
 }
